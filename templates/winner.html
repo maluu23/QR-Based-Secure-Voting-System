@@ -1,0 +1,392 @@
+```html
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Winner Details</title>
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f6f9;
+    }
+
+    .header {
+        background: #212529;
+        color: white;
+        text-align: center;
+        padding: 30px 20px;
+    }
+
+    .header h1 {
+        margin: 0;
+        font-size: 32px;
+    }
+
+    .header p {
+        margin-top: 10px;
+        font-size: 16px;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .winner-card {
+        background: white;
+        border-radius: 18px;
+        padding: 35px;
+        margin-bottom: 30px;
+        text-align: center;
+        box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+        border-top: 6px solid #28a745;
+    }
+
+    .trophy {
+        font-size: 55px;
+        margin-bottom: 10px;
+    }
+
+    .congratulations {
+        font-size: 28px;
+        font-weight: bold;
+        color: #218838;
+        margin-bottom: 20px;
+    }
+
+    /* Election Details */
+
+    .election-info {
+        background: #f8f9fa;
+        border-radius: 12px;
+        padding: 15px 20px;
+        margin: 10px auto 25px;
+        max-width: 650px;
+    }
+
+    .election-name {
+        font-size: 21px;
+        font-weight: bold;
+        color: #212529;
+        margin-bottom: 8px;
+    }
+
+    .academic-year {
+        font-size: 15px;
+        color: #6c757d;
+    }
+
+    .post {
+        font-size: 22px;
+        font-weight: bold;
+        color: #343a40;
+        margin-bottom: 25px;
+    }
+
+    .winner-name {
+        font-size: 30px;
+        font-weight: bold;
+        margin: 15px 0;
+        text-transform: uppercase;
+    }
+
+    .details {
+        margin-top: 20px;
+    }
+
+    .detail-box {
+        display: inline-block;
+        background: #f8f9fa;
+        padding: 15px 25px;
+        margin: 8px;
+        border-radius: 10px;
+        min-width: 200px;
+    }
+
+    .detail-title {
+        font-size: 13px;
+        color: #6c757d;
+        margin-bottom: 7px;
+    }
+
+    .detail-value {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .elected {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        border-radius: 25px;
+        background: #28a745;
+        color: white;
+        font-weight: bold;
+    }
+
+    .back-btn {
+        display: block;
+        width: fit-content;
+        margin: 30px auto;
+        padding: 12px 25px;
+        background: #212529;
+        color: white;
+        text-decoration: none;
+        border-radius: 7px;
+    }
+
+    .back-btn:hover {
+        background: #343a40;
+    }
+
+    .print-btn {
+        display: block;
+        margin: 15px auto;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 7px;
+        background: #0d6efd;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+    .print-btn:hover {
+        background: #0b5ed7;
+    }
+
+    @media print {
+
+        .back-btn,
+        .print-btn {
+            display: none;
+        }
+
+        body {
+            background: white;
+        }
+
+        .winner-card {
+            box-shadow: none;
+            page-break-inside: avoid;
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <h1>🏆 DEPARTMENT ELECTION</h1>
+
+    <p>
+        Official Winner Announcement
+    </p>
+
+</div>
+
+
+<div class="container">
+
+
+{% for winner in winners %}
+
+
+<!-- WINNER CARD -->
+
+<div class="winner-card">
+
+
+    <!-- Trophy -->
+
+    <div class="trophy">
+        🏆
+    </div>
+
+
+    <!-- Congratulations -->
+
+    <div class="congratulations">
+        🎉 Congratulations! 🎉
+    </div>
+
+
+    <!-- Election Information -->
+
+    <div class="election-info">
+
+        <div class="election-name">
+
+            🗳️ {{ winner.election_name }}
+
+        </div>
+
+        <div class="academic-year">
+
+            Academic Year:
+            <strong>
+                {{ winner.academic_year }}
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- Post -->
+
+    <div class="post">
+
+        {{ winner.post_name }}
+
+    </div>
+
+
+    <!-- Winner Name -->
+
+    <div class="winner-name">
+
+        {{ winner.student_name }}
+
+    </div>
+
+
+    <!-- Winner Details -->
+
+    <div class="details">
+
+
+        <!-- Register Number -->
+
+        <div class="detail-box">
+
+            <div class="detail-title">
+
+                REGISTER NUMBER
+
+            </div>
+
+            <div class="detail-value">
+
+                {{ winner.register_no }}
+
+            </div>
+
+        </div>
+
+
+        <!-- Votes -->
+
+        <div class="detail-box">
+
+            <div class="detail-title">
+
+                VOTES SECURED
+
+            </div>
+
+            <div class="detail-value">
+
+                🗳️ {{ winner.total_votes }}
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- Elected -->
+
+    <div class="elected">
+
+        ✓ OFFICIALLY ELECTED
+
+    </div>
+
+
+</div>
+
+
+{% endfor %}
+
+
+<!-- NO WINNER -->
+
+{% if not winners %}
+
+<div class="winner-card">
+
+    <div class="trophy">
+
+        📋
+
+    </div>
+
+    <h2>
+
+        No Winner Details Available
+
+    </h2>
+
+    <p>
+
+        Election results are not available yet.
+
+    </p>
+
+</div>
+
+{% endif %}
+
+
+<!-- PRINT BUTTON -->
+
+<button class="print-btn"
+        onclick="window.print()">
+
+    🖨️ Print Winner Details
+
+</button>
+
+
+<!-- BACK BUTTON -->
+
+<a href="{{ url_for('admin_dashboard') }}"
+   class="back-btn">
+
+    ← Back to Dashboard
+
+</a>
+
+
+</div>
+
+
+</body>
+
+</html>
+```
